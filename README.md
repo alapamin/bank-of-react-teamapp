@@ -1,5 +1,5 @@
 # bank-of-react-teamapp
- Group Members:
- Alap Amin 
+ Group Members: <br>
+ Alap Amin <br>
  Nafew Mustafa(@Nafyou)
  
