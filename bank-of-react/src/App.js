@@ -25,10 +25,12 @@ class App extends Component {
 
     return (
       <Router>
-        <div>
-          <Route exact path="/" render={HomeComponent}/>
-          <Route exact path="/userProfile" render={UserProfileComponent}/>
-        </div>
+      <div>
+        <Switch>
+          <Route exact path="/" render={HomeComponent}></Route>
+          <Route exact path="/userProfile" render={UserProfileComponent}></Route>
+        </Switch>
+      </div>
       </Router>
     );
   }
