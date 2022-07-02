@@ -3,13 +3,14 @@
 import React, {Component} from 'react';
 
 class AccountBalance extends Component {
-    render() {
+  // Display account balance
+  render() {
     return (
-        <div>
-            Balance: {this.props.accountBalance}
-        </div>
+      <div>
+        Balance: {this.props.accountBalance}
+      </div>
     );
-    }
+  }
 }
 
 export default AccountBalance;
