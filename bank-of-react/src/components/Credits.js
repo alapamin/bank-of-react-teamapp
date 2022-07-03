@@ -30,10 +30,10 @@ class Credits extends Component{
   }
 
   handleChange = (e) => {
-    const updatedCredit = {...this.state.user}
-    const inputField = e.target.name
-    const inputValue = e.target.value
-    updatedCredit[inputField] = inputValue
+    const updatedCredit = {...this.state.user};
+    const inputField = e.target.name;
+    const inputValue = e.target.value;
+    updatedCredit[inputField] = inputValue;
 
     this.setState({user: updatedCredit})
   }
@@ -41,23 +41,25 @@ class Credits extends Component{
   handleSubmit = (e) => {
     e.preventDefault()
     let newCredit = {...this.state.credit};
-    
+    console.log(newCredit.description);
     if(newCredit.description === ''){
-      prompt('Enter a new description');
+      newCredit.description = prompt('Enter a new descriptions');
       return;
     }
-    if(newCredit.amount === 0){
-      prompt('Enter a new amount');
+    if(Number(newCredit.amount) === 0){
+      newCredit.amount = prompt('Enter a non-zero amount');
       return;
     }
     newCredit.date = this.getDate();
-    this.props.addCredit(newCredit);
+    this.props.updateCredits(newCredit);
   }
 
   render(){
     return(
-      <div>
+      <>
+        
         <h1>-- Credits --</h1>
+        
         <div>
           <h2>Display Credits</h2>
           <table>
@@ -66,7 +68,7 @@ class Credits extends Component{
               <th>Amount</th>
               <th>Date</th>
             </tr>
-            {this.props.allCredit.map(credit => {
+            {this.props.allCredits.map(credit => {
               return <tr key={credit.id}>
                 <td>{credit.description}</td>
                 <td>{credit.amount}</td>
@@ -102,8 +104,8 @@ class Credits extends Component{
           <Link to='/Login'>Login</Link>
           <Link to='/UserProfile'>User</Link>
           <Link to='/Debits'>Debits</Link>
-        </div>
-      </div>
+        </div> 
+      </>
     )
   }
 
