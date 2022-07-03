@@ -17,8 +17,10 @@ class App extends Component {
       currentUser: {
         userName: 'Joe Smith',
         memberSince: '11/22/99',
-      }
+      },
+      credits: []
     }
+    this.addCredit = this.addCredit.bind(this);
   }
 
   // Update state's currentUser (userName) after "Log In" button is clicked
