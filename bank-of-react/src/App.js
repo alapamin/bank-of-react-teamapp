@@ -47,7 +47,7 @@ class App extends Component {
   updateDebits = (debit) => {
     if(debit !== undefined  && this.state.debits !== ''){
       let newDebits = this.state.debits;
-      newDebits.append(debit)
+      newDebits.push(debit)
       let newAccountBalance = Number(this.state.accountBalance) + Number(debit.amount);
       this.setState({debits: newDebits})
       this.setState({accountBalance: newAccountBalance})
@@ -59,10 +59,11 @@ class App extends Component {
   updateCredits = (credit) => {
     if (credit !== undefined && this.state.credits !== ''){
       let newCredits = this.state.credits;
-      newCredits.append(credit)
+      newCredits.push(credit)
       let newAccountBalance = Number(this.state.accountBalance) - Number(credit.amount);
       this.setState({credits: newCredits});
       this.setState({accountBalance: newAccountBalance});
+      
     }
   }
   // Update state's currentUser (userName) after "Log In" button is clicked
@@ -80,7 +81,7 @@ class App extends Component {
       <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}  />
     );
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)  // Pass props to "LogIn" component
-    const CreditsComponent = () => (<Credits accountBalance={this.state.accountBalance} allCredits={this.state.credits} updateCredits={this.state.updateCredits}/>)
+    const CreditsComponent = () => (<Credits accountBalance={this.state.accountBalance} allCredits={this.state.credits} updateCredits={this.updateCredits}/>)
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
       <Router basename="/bank-of-react-example-code-gh-pages">

@@ -18,40 +18,39 @@ class Credits extends Component{
       credit: {
         description: '',
         amount: 0,
-        date: ''
+        date: this.getToday()
       }
     }
   }
 
-  getDate = () =>{
+  getToday = () =>{
     let newDate = new Date();
-    let date = (newDate.getMonth() + 1) + '/' + newDate.getDay() + '/' + newDate.getFullYear();
+    let date = (newDate.getMonth() + 1) + '/' + newDate.getDate() + '/' + newDate.getFullYear();
     return date;
   }
 
   handleChange = (e) => {
-    const updatedCredit = {...this.state.user};
+    const updatedCredit = {...this.state.credit};
     const inputField = e.target.name;
+    console.log(e.target.name)
     const inputValue = e.target.value;
     updatedCredit[inputField] = inputValue;
 
-    this.setState({user: updatedCredit})
+    this.setState({credit: updatedCredit})
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
     let newCredit = {...this.state.credit};
-    console.log(newCredit.description);
     if(newCredit.description === ''){
-      newCredit.description = prompt('Enter a new descriptions');
+      alert('Enter a new descriptions');
       return;
     }
     if(Number(newCredit.amount) === 0){
-      newCredit.amount = prompt('Enter a non-zero amount');
+      alert('Enter a non-zero amount');
       return;
     }
-    newCredit.date = this.getDate();
-    this.props.updateCredits(newCredit);
+    this.props.updateCredits(this.state.credit)
   }
 
   render(){
@@ -86,15 +85,15 @@ class Credits extends Component{
           <h2>Add Credit</h2>
           <form onSubmit={this.handleSubmit}>
             <div>
-              <label htmlFor='description'>Description - </label>
-              <input type="text" name="description" onChange={this.handleChange} value={this.state.description}></input>
+              <label htmlFor="description">Description - </label>
+              <input type="text" name="description" onChange={this.handleChange} value={this.state.credit.description}></input>
             </div>
             <div>
-              <label htmlFor='amount'>Amount - </label>
-              <input type='number' name='amount' onChange={this.handleChange} value={this.state.amount}></input>
+              <label htmlFor="amount">Amount - </label>
+              <input type="number" name="amount" onChange={this.handleChange} value={Number(this.state.credit.amount)}></input>
             </div>
             <div>
-              <label htmlFor='date'>Date - {this.getDate()}</label>
+              <label htmlFor="date">Date - {this.getToday()}</label>
             </div>
             <button>Add Credit</button>
           </form>
