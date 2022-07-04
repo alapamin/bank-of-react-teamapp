@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bank-of-react-teamapp/static/css/main.01e685fb.css",
+    "main.js": "/bank-of-react-teamapp/static/js/main.3fb1e36d.js",
+    "static/js/787.40bd3877.chunk.js": "/bank-of-react-teamapp/static/js/787.40bd3877.chunk.js",
+    "index.html": "/bank-of-react-teamapp/index.html",
+    "main.01e685fb.css.map": "/bank-of-react-teamapp/static/css/main.01e685fb.css.map",
+    "main.3fb1e36d.js.map": "/bank-of-react-teamapp/static/js/main.3fb1e36d.js.map",
+    "787.40bd3877.chunk.js.map": "/bank-of-react-teamapp/static/js/787.40bd3877.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01e685fb.css",
+    "static/js/main.3fb1e36d.js"
+  ]
+}
