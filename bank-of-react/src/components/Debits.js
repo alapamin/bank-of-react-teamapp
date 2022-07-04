@@ -1,28 +1,105 @@
-// src/components/Debits.js
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import AccountBalance from './AccountBalance';
 
-const Debits = (props) => {
-  // Create the list of Debit items
-	let debitsView = () => {
-    const { debits } = props;
-    return debits.map((debit) => {
-      let date = debit.date.slice(0,10);
-      return <li key={debit.id}>{debit.amount} {debit.description} {date}</li>
-    }) 
+
+class Debits extends Component{
+  constructor(){
+    super()
+    this.state = {
+      debit: {
+        description: '',
+        amount: 0,
+        date: this.getToday()
+      }
+    }
   }
-  // Render the list of Debit items and a form to input new Debit item
-  return (
-    <div>
-      <h1>Debits</h1>
 
-      {debitsView()}
+  getToday = () =>{
+    let newDate = new Date();
+    let date = (newDate.getMonth() + 1) + '/' + newDate.getDate() + '/' + newDate.getFullYear();
+    return date;
+  }
 
-      <form onSubmit={props.addDebit}>
-        <input type="text" name="description" />
-        <input type="number" name="amount" />
-        <button type="submit">Add Debit</button>
-      </form>
-    </div>
-  )
+  handleChange = (e) => {
+    const updatedDebit = {...this.state.debit};
+    const inputField = e.target.name;
+    console.log(e.target.name)
+    const inputValue = e.target.value;
+    updatedDebit[inputField] = inputValue;
+
+    this.setState({debit: updatedDebit})
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    let newDebit = {...this.state.debit};
+    if(newDebit.description === ''){
+      alert('Enter a new descriptions');
+      return;
+    }
+    if(Number(newDebit.amount) === 0){
+      alert('Enter a non-zero amount');
+      return;
+    }
+    this.props.updateDebits(this.state.debit)
+  }
+
+  render(){
+    return(
+      <>
+        
+        <h1>-- Debits --</h1>
+        
+        <div>
+          <h2>Display Debits</h2>
+          <table>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+            {this.props.allDebits.map(debit => {
+              return <tr key={debit.id}>
+                <td>{debit.description}</td>
+                <td>{debit.amount}</td>
+                <td>{debit.date}</td>
+              </tr>
+            })}
+          </table>
+          <div>
+            <h2>Total: </h2>
+            <AccountBalance accountBalance={this.props.accountBalance}/>
+          </div>
+        </div>
+
+        <div>
+          <h2>Add Debit</h2>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="description">Description - </label>
+              <input type="text" name="description" onChange={this.handleChange} value={this.state.credit.description}></input>
+            </div>
+            <div>
+              <label htmlFor="amount">Amount - </label>
+              <input type="number" name="amount" onChange={this.handleChange} value={Number(this.state.credit.amount)}></input>
+            </div>
+            <div>
+              <label htmlFor="date">Date - {this.getToday()}</label>
+            </div>
+            <button>Add Debit</button>
+          </form>
+        </div>
+        <div>
+          <Link to='/'>Home </Link>
+          <Link to='/Login'>Login </Link>
+          <Link to='/UserProfile'>User </Link>
+          <Link to='/Debits'>Debits </Link>
+        </div> 
+      </>
+    )
+  }
+
 }
 
 export default Debits;

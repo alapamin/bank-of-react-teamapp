@@ -8,6 +8,7 @@ import Home from './components/Home';
 import UserProfile from './components/UserProfile';
 import LogIn from './components/Login';
 import Credits from './components/Credits';
+import Debits from './components/Debits';
 
 class App extends Component {
   constructor() {  // Create and initialize state
@@ -37,6 +38,7 @@ class App extends Component {
     );
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)  // Pass props to "LogIn" component
 
+    const DebitsComponent = () => (<Debits accountBalance={this.state.accountBalance} allDebits={this.state.debits} updateCredits={this.updateDebits}/>)
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
       <Router basename="/bank-of-react-example-code-gh-pages">
@@ -45,6 +47,7 @@ class App extends Component {
           <Route exact path="/userProfile" render={UserProfileComponent}/>
           <Route exact path="/login" render={LogInComponent}/>
           <Route exact path="/credits" render={Credits}/>
+          <Route exact path="/debits" render={DebitsComponent}/>
         </div>
       </Router>
     );
