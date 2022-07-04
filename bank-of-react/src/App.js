@@ -21,8 +21,10 @@ class App extends Component {
         memberSince: '11/22/99',
       },
       credits: [],
+      debits: []
     }
     this.updateCredits = this.updateCredits.bind(this)
+    this.updateDebits = this.updateDebits.bind(this)
   }
   // TODO: Add Component did mount function
   async componentDidMount(){
@@ -36,8 +38,12 @@ class App extends Component {
     let debits = rawDebits.data;
     let credits = rawCredits.data;
 
-    debit_total = debits.reduce((prev_debit,curr_debit,index) => prev_debit + curr_debit,0);
-    credit_total = credits.reduce((prev_credit,curr_credit,index) => prev_credit + curr_credit,0);
+    debit_total = debits.reduce((prev_debit,curr_debit,index) => prev_debit + curr_debit.amount,0);
+    console.log("debit_total",debit_total)
+    credit_total = credits.reduce((prev_credit,curr_credit,index) => prev_credit + curr_credit.amount,0);
+    console.log("credit_total",credit_total);
+    console.log("debits:",debits)
+    console.log("credits:",credits)
 
     let accountBalance = credit_total - debit_total;
 
@@ -51,9 +57,8 @@ class App extends Component {
       newDebits.push(debit)
       let newAccountBalance = Number(this.state.accountBalance) + Number(debit.amount);
       this.setState({debits: newDebits})
-      this.setState({accountBalance: newAccountBalance})
-
-
+      this.setState({accountBalance: Number(newAccountBalance)})
+      console.log(newAccountBalance);
     }
   }
 
@@ -63,7 +68,8 @@ class App extends Component {
       newCredits.push(credit)
       let newAccountBalance = Number(this.state.accountBalance) - Number(credit.amount);
       this.setState({credits: newCredits});
-      this.setState({accountBalance: newAccountBalance});
+      console.log(newAccountBalance)
+      this.setState({accountBalance: Number(newAccountBalance)});
       
     }
   }
@@ -84,7 +90,7 @@ class App extends Component {
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)  // Pass props to "LogIn" component
 
 
-    const DebitsComponent = () => (<Debits accountBalance={this.state.accountBalance} allDebits={this.state.debits} updateCredits={this.updateDebits}/>)
+    const DebitsComponent = () => (<Debits accountBalance={this.state.accountBalance} allDebits={this.state.debits} updateDebits={this.updateDebits}/>)
     const CreditsComponent = () => (<Credits accountBalance={this.state.accountBalance} allCredits={this.state.credits} updateCredits={this.updateCredits}/>)
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
