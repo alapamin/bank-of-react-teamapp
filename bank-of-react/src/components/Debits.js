@@ -78,11 +78,11 @@ class Debits extends Component{
           <form onSubmit={this.handleSubmit}>
             <div>
               <label htmlFor="description">Description - </label>
-              <input type="text" name="description" onChange={this.handleChange} value={this.state.credit.description}></input>
+              <input type="text" name="description" onChange={this.handleChange} value={this.state.debit.description}></input>
             </div>
             <div>
               <label htmlFor="amount">Amount - </label>
-              <input type="number" name="amount" onChange={this.handleChange} value={Number(this.state.credit.amount)}></input>
+              <input type="number" name="amount" onChange={this.handleChange} value={Number(this.state.debit.amount)}></input>
             </div>
             <div>
               <label htmlFor="date">Date - {this.getToday()}</label>
@@ -94,7 +94,7 @@ class Debits extends Component{
           <Link to='/'>Home </Link>
           <Link to='/Login'>Login </Link>
           <Link to='/UserProfile'>User </Link>
-          <Link to='/Debits'>Debits </Link>
+          <Link to='/Credits'>Credits </Link>
         </div> 
       </>
     )
